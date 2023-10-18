@@ -9,7 +9,11 @@ public with sharing class BillEmailer {
         //object. Set the bccAddress to the email from the iteration, set a PlainTextBody, and set a Subject for the
         //Messaging.SingleEmailMessage object.
 
+        List<Messaging.SingleEmailMessage> emailsToSend = new List<Messaging.SingleEmailMessage>(); //Added by Maha
+
         for(String email : emailsWithBills.keySet()) {
+
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage(); //Added by Maha
 
             //use the following
             //to attach the PDF blob to the email:
@@ -19,6 +23,8 @@ public with sharing class BillEmailer {
             attach.ContentType = 'application/pdf';
 
             mail.setFileAttachments(new Messaging.EmailFileAttachment[]{attach});
+
+            emailsToSend.add(mail); //Added by Maha
 
             //add the Messaging.SingleEmailMessage object to the list inside of the loop, and send the email outside of the loop.
 
