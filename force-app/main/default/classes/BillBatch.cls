@@ -10,6 +10,11 @@ public with sharing class BillBatch implements Database.Batchable<sObject>, Data
         //query for the following fields:
         //Id, Bill_By_Email__c
 
+         //Added by Maha
+         String query = 'SELECT Id,Name,Bill_By_Email__c FROM Account WHERE Active__c = \'Yes\' AND Bill_By_Email__c != NULL';
+
+         return Database.getQueryLocator(query);
+
 
     }
 
