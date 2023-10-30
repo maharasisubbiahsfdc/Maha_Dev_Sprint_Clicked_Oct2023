@@ -80,7 +80,14 @@ public with sharing class BillEmailer {
 
             PageReference pageRef = new PageReference('/apex/BillVFP?id=' + RecentBill.Id);
 
-            Blob pdfBlob = pageRef.getContentAsPDF();
+            Blob pdfBlob;
+            if(Test.isRunningTest()) { 
+                pdfBlob =  blob.valueOf('Unit.Test');
+
+            }else{
+                
+                pdfBlob = pageRef.getContentAsPDF();
+            }
             Map<String, Blob> testBlob = new Map<String,Blob>{RecentBill.Account__r.Email__c => pdfBlob};
             
             sendEmails(testBlob);

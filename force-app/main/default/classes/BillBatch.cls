@@ -57,7 +57,15 @@ public with sharing class BillBatch implements Database.Batchable<sObject>, Data
             if(!acc.Bills__r.isEmpty() && acc.Email__c != NULL ) {
             
                 PageReference pageRef = new PageReference('/apex/BillVFP?id=' + acc.Bills__r[0].Id);
-                Blob pdfBlob = pageRef.getContentAsPDF();
+                Blob pdfBlob;
+                if(Test.isRunningTest()) { 
+                    pdfBlob =  blob.valueOf('Unit.Test');
+
+                }else{
+                    
+                    pdfBlob = pageRef.getContentAsPDF();
+                }
+              
                 sendMap.put(acc.Email__c,pdfBlob);
             }
         }
