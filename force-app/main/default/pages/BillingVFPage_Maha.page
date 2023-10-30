@@ -1,0 +1,60 @@
+<apex:page standardController="Account" readOnly="true" renderAs="pdf"> 
+    
+You are looking at the Most Recent Bill for {!Account.Name}. <br/> <br/><br/>
+<apex:panelGrid columns="2"  id="acctInfo" style="width:100%">
+
+<apex:panelGroup>
+    <apex:outputText value="Email" id="accEmailTxt" style="font-weight: bold;width:50%" /><br/><br/>
+    <apex:outputText value="{!Account.Email__c}" id="accEmail"/><br/><br/>
+</apex:panelGroup>
+
+<apex:panelGroup>
+    <apex:outputText value="Phone" id="accPhoneTxt" style="font-weight: bold;width:50%" /> <br/><br/>
+    <apex:outputText value="{!Account.Phone}" id="accPhone"/><br/><br/>
+</apex:panelGroup>
+<apex:panelGroup>
+    <apex:outputText value="Billing Address" id="accbillTxt" style="font-weight: bold;" /> <br/><br/>
+    <apex:outputText value="{!Account.BillingStreet}" id="accBillStr"/> <br/>
+    <apex:outputText value="{!Account.BillingState}" id="accBillSta"/>  
+    <apex:outputText value="{!Account.BillingCountry}" id="accBillctry"/> <br/>
+    <apex:outputText value="{!Account.BillingPostalCode}" id="accBillpcode"/>
+
+</apex:panelGroup>
+<apex:panelGroup>
+    <apex:outputText value="Shipping Address" id="accshipTxt" style="font-weight: bold;" /> <br/><br/>
+    <apex:outputText value="{!Account.ShippingStreet}" id="accShipStr"/> <br/>
+    <apex:outputText value="{!Account.ShippingState}" id="accShipSta"/> 
+    <apex:outputText value="{!Account.ShippingCountry}" id="accShipctry"/> <br/>
+    <apex:outputText value="{!Account.ShippingPostalCode}" id="accShippcode"/>
+
+</apex:panelGroup>
+
+
+</apex:panelGrid>
+
+
+<apex:variable var="rowNum" value="{!0}" /> 
+
+
+    <apex:repeat var="Bill" value="{!Account.Bills__r}" >
+       
+    
+    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+
+    </apex:repeat>
+
+    {!rowNum}
+
+    {!Account.Bills__r[rowNum-1]}
+   
+    
+                
+    
+            
+  
+    
+</apex:pageBlock>
+
+        
+
+</apex:page>
